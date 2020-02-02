@@ -2,15 +2,13 @@ class UsersController < ApplicationController
 
 	def user_detail
 		user = current_user
-		respond_to do |format|
+		# respond_to do |format|
 			if user
-				format.json { render json: user: user, followers: user.followers,
-					following: user.followed_users, message: "User Details"
-					, status: :success }
+				render json: { user: user, followers: user.followers,following: user.followed_users, message: "User Details", status: :success }
 			else
-				format.json { render json: message: "User Not Found", status: :unprocessable_entity }
+				render json: { message: "User Not Found", status: :unprocessable_entity }
 			end
-		end
+		# end
 	end
 
 	def follow
@@ -34,7 +32,7 @@ class UsersController < ApplicationController
 	end
 
 	def tweets
-		tweets = current_user.tweets.order("desc")
+		tweets = current_user.tweets.order("id desc")
 		if tweets
 			render json: { tweets: tweets, status: :success, message: "Success"}
 		else
