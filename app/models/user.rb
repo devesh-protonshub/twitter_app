@@ -10,15 +10,15 @@ class User < ApplicationRecord
 	has_many :followed_users, through: :relationships, source: :followed
 
 
-  def following?(other_user)
-    relationships.find_by(followed_id: other_user.id)
+  def following?(user_id)
+    relationships.find_by(followed_id: user_id)
   end
 
-  def follow!(other_user)
-    relationships.create!(followed_id: other_user.id)
+  def follow!(user_id)
+    relationships.create!(followed_id: user_id)
   end
 
-  def unfollow!(other_user)
-    relationships.find_by(followed_id: other_user.id).destroy
+  def unfollow!(user_id)
+    relationships.find_by(followed_id: user_id).destroy
   end
 end

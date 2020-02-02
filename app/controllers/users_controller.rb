@@ -13,7 +13,7 @@ class UsersController < ApplicationController
 
 	def follow
 		unless current_user.following?(params[:user_id])
-			render_object current_user.follow!(params[:user_id])
+			render json: {status: :success, message: "Followed Successfully", user: current_user.follow!(params[:user_id])}
 		else
 			render json: {status: :success, message: "Already Followed"}
 		end
